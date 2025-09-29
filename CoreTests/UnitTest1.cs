@@ -12,15 +12,15 @@ public class Tests
     [Test]
     public void ConvertStringToArrayTest()
     {
-        double[] result = { 1, 2, 3 };
-        string testString = "583, 743, 721";
-        // Assert.That(result, Is.EqualTo(Statistics.ConvertStringToArray(testString)));
+        double[]? result = null;
+        string testString = "1, 2, 3, gfhgh";
+        Assert.That(result, Is.EqualTo(Statistics.ConvertStringToArray(testString)));
 
         // Assert.That(Statistics.ConvertStringToArray(testString), Is.Empty);
 
         // Assert.That(Statistics.ConvertStringToArray(testString), Has.Exactly(3).Items);
 
-        Assert.That(Statistics.ConvertStringToArray(testString), Has.None.EqualTo(584));
+        // Assert.That(Statistics.ConvertStringToArray(testString), Has.None.EqualTo(584));
     }
 
     [Test]

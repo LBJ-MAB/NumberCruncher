@@ -2,7 +2,7 @@
 
 public static class Statistics
 {
-    public static double[] ConvertStringToArray(string numberString)
+    public static double[]? ConvertStringToArray(string numberString)
     {
         /*
          * INPUTS:
@@ -24,10 +24,17 @@ public static class Statistics
             
             if (commaIndex >= 0)
             {
-                // Comma exists - get the number preceding the next comma in the string
-                double nextNum = Convert.ToDouble(numberStringTmp.Substring(0, commaIndex));
-                // add the next number to the list
-                numbersList.Add(nextNum);
+                try
+                {
+                    // Comma exists - try and get the number preceding the next comma in the string
+                    double nextNum = Convert.ToDouble(numberStringTmp.Substring(0, commaIndex));
+                    // add the next number to the list
+                    numbersList.Add(nextNum);
+                }
+                catch
+                {
+                    return null;    // can't convert to double - return null
+                }
                 // get rid of that number and comma from the string
                 numberStringTmp = numberStringTmp.Substring(commaIndex+1);
             }
