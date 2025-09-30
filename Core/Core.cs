@@ -220,11 +220,11 @@ public static class Statistics
             {
                 if (i != mode.Length - 1)
                 {
-                    Console.Write("{0}, ", mode[i]);
+                    Console.Write("{0:F2}, ", mode[i]);
                 }
                 else
                 {
-                    Console.Write("{0}", mode[i]);
+                    Console.Write("{0:F2}", mode[i]);
                 }
             }
         }
