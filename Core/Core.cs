@@ -21,32 +21,34 @@ public static class Statistics
         {
             // find a comma in the string
             int commaIndex = numberStringTmp.IndexOf(',');
-            
-            if (commaIndex >= 0)
+
+            try
             {
-                try
+                if (commaIndex >= 0)
                 {
                     // Comma exists - try and get the number preceding the next comma in the string
                     double nextNum = Convert.ToDouble(numberStringTmp.Substring(0, commaIndex));
                     // add the next number to the list
                     numbersList.Add(nextNum);
+                
+                    // get rid of that number and comma from the string
+                    numberStringTmp = numberStringTmp.Substring(commaIndex+1);
                 }
-                catch
+                else
                 {
-                    return null;    // can't convert to double - return null
+                    // Comma doesn't exist - we have reached the final number
+                    // turn the rest of the string into a number
+                    double nextNum = Convert.ToDouble(numberStringTmp);
+                    // add next number to the list
+                    numbersList.Add(nextNum);
+                    // we have reached final number, so set string length to 0
+                    numberStringTmp = "";
                 }
-                // get rid of that number and comma from the string
-                numberStringTmp = numberStringTmp.Substring(commaIndex+1);
             }
-            else
+            catch
             {
-                // Comma doesn't exist - we have reached the final number
-                // turn the rest of the string into a number
-                double nextNum = Convert.ToDouble(numberStringTmp);
-                // add next number to the list
-                numbersList.Add(nextNum);
-                // we have reached final number, so set string length to 0
-                numberStringTmp = "";
+                // issue with turning string into array - return null
+                return null;
             }
         }
         // return the array of numbers

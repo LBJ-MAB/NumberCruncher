@@ -13,7 +13,7 @@ public class Tests
     public void ConvertStringToArrayTest()
     {
         double[]? result = null;
-        string testString = "1, 2, 3, gfhgh";
+        string testString = "67, gh, sww, 98";
         Assert.That(result, Is.EqualTo(Statistics.ConvertStringToArray(testString)));
 
         // Assert.That(Statistics.ConvertStringToArray(testString), Is.Empty);
