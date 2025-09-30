@@ -14,11 +14,6 @@ public class Tests
     {
         double[] result = { 1, 2, 3 };
         string testString = "583, 743, 721";
-        // Assert.That(result, Is.EqualTo(Statistics.ConvertStringToArray(testString)));
-
-        // Assert.That(Statistics.ConvertStringToArray(testString), Is.Empty);
-
-        // Assert.That(Statistics.ConvertStringToArray(testString), Has.Exactly(3).Items);
 
         Assert.That(Statistics.ConvertStringToArray(testString), Has.None.EqualTo(584));
     }
