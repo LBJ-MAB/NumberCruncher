@@ -2,13 +2,14 @@
 
 public static class Statistics
 {
-    public static double[] ConvertStringToArray(string numberString)
+    public static double[]? ConvertStringToArray(string numberString)
     {
         /*
          * INPUTS:
          * numberString : a string of numbers inputted by the user, each number separated by a comma
          * OUTPUTS:
-         * numbersList.ToArray() : an array of the numbers that the user inputted into the console
+         * numbersList.ToArray() : an array of the numbers that the user inputted into the console || null if input
+         *  string is not formatted correctly
         */
         
         // define local variable for numberString
@@ -21,25 +22,32 @@ public static class Statistics
         {
             // find a comma in the string
             int commaIndex = numberStringTmp.IndexOf(',');
-            
-            if (commaIndex >= 0)
+
+            try
             {
-                // Comma exists - get the number preceding the next comma in the string
-                double nextNum = Convert.ToDouble(numberStringTmp.Substring(0, commaIndex));
-                // add the next number to the list
-                numbersList.Add(nextNum);
-                // get rid of that number and comma from the string
-                numberStringTmp = numberStringTmp.Substring(commaIndex+1);
+                if (commaIndex >= 0)
+                {
+                    // Comma exists - get the number preceding the next comma in the string
+                    double nextNum = Convert.ToDouble(numberStringTmp.Substring(0, commaIndex));
+                    // add the next number to the list
+                    numbersList.Add(nextNum);
+                    // get rid of that number and comma from the string
+                    numberStringTmp = numberStringTmp.Substring(commaIndex+1);
+                }
+                else
+                {
+                    // Comma doesn't exist - we have reached the final number
+                    // turn the rest of the string into a number
+                    double nextNum = Convert.ToDouble(numberStringTmp);
+                    // add next number to the list
+                    numbersList.Add(nextNum);
+                    // we have reached final number, so set string length to 0
+                    numberStringTmp = "";
+                }
             }
-            else
+            catch
             {
-                // Comma doesn't exist - we have reached the final number
-                // turn the rest of the string into a number
-                double nextNum = Convert.ToDouble(numberStringTmp);
-                // add next number to the list
-                numbersList.Add(nextNum);
-                // we have reached final number, so set string length to 0
-                numberStringTmp = "";
+                return null;        // can't make array - return null
             }
         }
         // return the array of numbers
