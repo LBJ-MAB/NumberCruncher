@@ -133,18 +133,24 @@ public static class Statistics
         }
         return minValue;    // return minValue
     }
-    public static double Mode(double[] nums)
+    public static double[]? Mode(double[] nums)
     {
         /*
          * INPUTS:
          * nums : an array of numbers
          * OUTPUTS:
-         * modeValue : the mode of the nums array
+         * modeValue : array of mode values || null if no mode value
         */
         
-        double modeValue = 0;       // mode value to return
-        int maxOccurences = 0;      // number of times the mode number appears
-        Dictionary<double, int> dict = new Dictionary<double, int>();       // define dictionary for key, value pairs
+        // if nums is empty, return null
+        if (nums.Length == 0)
+        {
+            return null;
+        }
+
+        List<double> modeList = new List<double>();     // empty list for storing mode values n
+        int maxOccurences = 0;                          // number of times the mode number appears
+        Dictionary<double, int> dict = new Dictionary<double, int>();       // define dictionary for number, total pairs
 
         // loop through each number of nums
         foreach (double num in nums)
@@ -157,19 +163,30 @@ public static class Statistics
             {
                 dict.Add(num, 1);   // set number of times this number has appeared to 1
             }
+            
+            // update max occurences if applicable
+            if (dict[num] > maxOccurences)
+            {
+                maxOccurences = dict[num];
+            }
+        }
+        
+        // if all values only appear once, return null
+        if (maxOccurences == 1 && nums.Length > 1)
+        {
+            return null;
         }
 
         // loop through each <number, total> in dictionary
         foreach (KeyValuePair<double, int> ele in dict)
         {
-            if (ele.Value > maxOccurences)      // total > maxOccurences
+            if (ele.Value == maxOccurences)      // if it is a mode value
             {
-                modeValue = ele.Key;        // set new mode value
-                maxOccurences = ele.Value;  // set new mode threshold
+                modeList.Add(ele.Key);           // add mode value to list
             }
         }
 
-        return modeValue;    // return mode number
+        return modeList.ToArray();    // return array of mode values
     }
     public static void PrintAverages(double mean, double mode, double median,
         double min, double max, double stdev)
