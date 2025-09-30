@@ -133,43 +133,60 @@ public static class Statistics
         }
         return minValue;    // return minValue
     }
-    public static double Mode(double[] nums)
+    public static double[]? Mode(double[] nums)
     {
         /*
          * INPUTS:
          * nums : an array of numbers
          * OUTPUTS:
-         * modeValue : the mode of the nums array
+         * modeValue : null if no mode found, or array of mode numbers
         */
-        
-        double modeValue = 0;       // mode value to return
-        int maxOccurences = 0;      // number of times the mode number appears
+
+        // null if no numbers given
+        if (nums.Length == 0)
+        {
+            return null;
+        } 
+
+        List<double> modeList = new List<double>();     // list for storing mode value(s)
+        int maxOccurences = 0;                          // number of times the mode number appears
         Dictionary<double, int> dict = new Dictionary<double, int>();       // define dictionary for key, value pairs
 
         // loop through each number of nums
         foreach (double num in nums)
         {
-            if (dict.ContainsKey(num))      // current number has already appeared in nums array
+            if (dict.ContainsKey(num))          // current number has already appeared in nums array
             {
                 dict[num] = dict[num] + 1;      // increment number of times this number has appeared by 1
             }
-            else        // current number has not appeared before
+            else                                // current number has not appeared before
             {
-                dict.Add(num, 1);   // set number of times this number has appeared to 1
+                dict.Add(num, 1);               // set number of times this number has appeared to 1
             }
+            
+            
+            if (dict[num] > maxOccurences)
+            {
+                maxOccurences = dict[num];      // update max occurences if applicable
+            }
+        }
+        
+        // if all items are unique - return null
+        if (maxOccurences == 1 && nums.Length > 1)
+        {
+            return null;
         }
 
         // loop through each <number, total> in dictionary
         foreach (KeyValuePair<double, int> ele in dict)
         {
-            if (ele.Value > maxOccurences)      // total > maxOccurences
+            if (ele.Value == maxOccurences)      // find any mode values
             {
-                modeValue = ele.Key;        // set new mode value
-                maxOccurences = ele.Value;  // set new mode threshold
+                modeList.Add(ele.Key);          // add this value to modeList
             }
         }
 
-        return modeValue;    // return mode number
+        return modeList.ToArray();    // return array of mode numbers
     }
     public static void PrintAverages(double mean, double mode, double median,
         double min, double max, double stdev)
