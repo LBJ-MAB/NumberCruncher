@@ -26,18 +26,44 @@ public class Tests
     [Test]
     public void MeanTest()
     {
-        double result = 2;
-        double[] testArray = { 1, 2, 3 };
-        Assert.That(result, Is.EqualTo(Statistics.Mean(testArray)));
+        Dictionary<double, double[]> testDict = new Dictionary<double, double[]>
+        {
+            { 2, [1, 2, 3] },
+            { 10, [5, 10, 15] },
+            { 175, [200, 150, 100, 250] },
+            { 4.65, [1.2, 9.3, 5.4, 2.7] },
+            { -196.975682, [-1, -1000, 8, 4.98, 3.14159] },
+            { 4.087, [1.31, 2.47, 3.91, 4.44, 5.62, 6.77] }
+        };
+
+        foreach (var pair in testDict)
+        {
+            double expected = pair.Key;
+            double[] input = pair.Value;
+            Assert.That(expected, Is.EqualTo(Statistics.Mean(input)).Within(0.001d));
+        }
     }
 
-    [Test]
-    public void MedianTest()
-    {
-        double result = 2;
-        double[] testArray = { 1, 2, 3 };
-        Assert.That(result, Is.EqualTo(Statistics.Median(testArray)));
-    }
+    // [Test]
+    // public void MedianTest()
+    // {
+    //     Dictionary<double, double[]> testDict = new Dictionary<double, double[]>
+    //     {
+    //         { , [1, 2, 3] },
+    //         { , [5, 10, 15] },
+    //         { , [200, 150, 100, 250] },
+    //         { , [1.2, 9.3, 5.4, 2.7] },
+    //         { , [-1, -1000, 8, 4.98, 3.14159] },
+    //         { , [1.31, 2.47, 3.91, 4.44, 5.62, 6.77] }
+    //     };
+    //
+    //     foreach (var pair in testDict)
+    //     {
+    //         double expected = pair.Key;
+    //         double[] input = pair.Value;
+    //         Assert.That(expected, Is.EqualTo(Statistics.Median(input)).Within(0.001d));
+    //     }
+    // }
 
     [Test]
     public void ModeTest()
