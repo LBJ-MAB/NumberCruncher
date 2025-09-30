@@ -196,13 +196,13 @@ public static class Statistics
 
         return modeList.ToArray();    // return array of mode values
     }
-    public static void PrintAverages(double mean, double mode, double median,
+    public static void PrintAverages(double mean, double[]? mode, double median,
         double min, double max, double stdev)
     {
         /*
          * INPUTS:
          * mean : mean value of an array
-         * mode : mode value of an array
+         * mode : array of mode values of an array
          * median : median value of an array
          * min : min value of an array
          * max : max value of an array
@@ -213,7 +213,26 @@ public static class Statistics
         
         Console.WriteLine("--- Averages ---");
         Console.WriteLine("Mean   : {0:F2}", mean);
-        Console.WriteLine("Mode   : {0:F2}", mode);
+        Console.Write("Mode   : ");
+        if (mode != null)
+        {
+            for (int i = 0; i < mode.Length; i++)
+            {
+                if (i != mode.Length - 1)
+                {
+                    Console.Write("{0}, ", mode[i]);
+                }
+                else
+                {
+                    Console.Write("{0}", mode[i]);
+                }
+            }
+        }
+        else
+        {
+            Console.Write("N/A");
+        }
+        Console.WriteLine("");
         Console.WriteLine("Median : {0:F2}", median);
         Console.WriteLine("Min    : {0:F2}", min);
         Console.WriteLine("Max    : {0:F2}", max);
