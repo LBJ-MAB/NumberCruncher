@@ -101,3 +101,4 @@ C:\Users\Laurie.bassett-jones\Projects\NumberCruncher\CoreTests\obj\Debug\net8.0
 C:\Users\Laurie.bassett-jones\Projects\NumberCruncher\CoreTests\obj\Debug\net8.0\CoreTests.pdb
 C:\Users\Laurie.bassett-jones\Projects\NumberCruncher\CoreTests\obj\Debug\net8.0\CoreTests.genruntimeconfig.cache
 C:\Users\Laurie.bassett-jones\Projects\NumberCruncher\CoreTests\obj\Debug\net8.0\ref\CoreTests.dll
+C:\Users\Laurie.bassett-jones\Projects\NumberCruncher\CoreTests\bin\Debug\net8.0\FluentAssertions.dll
