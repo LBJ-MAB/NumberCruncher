@@ -1,4 +1,5 @@
 using Core;
+using Core.Query;
 using FluentAssertions;
 
 namespace CoreTests;
@@ -88,5 +89,40 @@ public class Tests
 
         stdev.Should().BeApproximately(result, 0.001f);
         stdev.Should().BePositive();
+    }
+    
+    // --- testing the query methods ---
+    [Test]
+    public void TestReadAndParseJsonIntoList()
+    {
+        // define expected result
+        List<Item> expectedItems = new List<Item>
+        {
+            new Item
+            {
+                productId = 101,
+                productName = "Laptop",
+                quantity = 1,
+                price = 1200.00f
+            }
+        };
+
+        OrderDetails expectedOrder = new OrderDetails
+        {
+            orderId = 1,
+            customerName = "John Doe",
+            orderDate = "2023-10-01",
+            items = expectedItems,
+            totalAmount = 1251.00f
+        };
+
+        // define json file path
+        string jsonFilePath = "orders.json";
+
+        // read and parse json into list
+        List<OrderDetails> actualOrder = Query.ReadAndParseJsonIntoList(jsonFilePath);
+
+        // test whether first element of the list is same as expected result
+        actualOrder[0].Should().BeEquivalentTo(expectedOrder);
     }
 }

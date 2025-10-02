@@ -1,0 +1,166 @@
+[
+  {
+    "orderId": 1,
+    "customerName": "John Doe",
+    "orderDate": "2023-10-01",
+    "items": [
+      {
+        "productId": 101,
+        "productName": "Laptop",
+        "quantity": 1,
+        "price": 1200.00
+      },
+      {
+        "productId": 102,
+        "productName": "Mouse",
+        "quantity": 2,
+        "price": 25.50
+      }
+    ],
+    "totalAmount": 1251.00
+  },
+  {
+    "orderId": 2,
+    "customerName": "Jane Smith",
+    "orderDate": "2023-10-02",
+    "items": [
+      {
+        "productId": 103,
+        "productName": "Keyboard",
+        "quantity": 1,
+        "price": 45.00
+      }
+    ],
+    "totalAmount": 45.00
+  },
+  {
+    "orderId": 3,
+    "customerName": "Alice Johnson",
+    "orderDate": "2023-10-03",
+    "items": [
+      {
+        "productId": 104,
+        "productName": "Monitor",
+        "quantity": 2,
+        "price": 300.00
+      },
+      {
+        "productId": 105,
+        "productName": "HDMI Cable",
+        "quantity": 3,
+        "price": 15.00
+      }
+    ],
+    "totalAmount": 930.00
+  },
+  {
+    "orderId": 4,
+    "customerName": "Bob Brown",
+    "orderDate": "2023-10-04",
+    "items": [
+      {
+        "productId": 106,
+        "productName": "Desk Chair",
+        "quantity": 1,
+        "price": 150.00
+      }
+    ],
+    "totalAmount": 150.00
+  },
+  {
+    "orderId": 5,
+    "customerName": "Charlie Green",
+    "orderDate": "2023-10-05",
+    "items": [
+      {
+        "productId": 107,
+        "productName": "Desk Lamp",
+        "quantity": 2,
+        "price": 35.00
+      }
+    ],
+    "totalAmount": 70.00
+  },
+  {
+    "orderId": 6,
+    "customerName": "Diana White",
+    "orderDate": "2023-10-06",
+    "items": [
+      {
+        "productId": 108,
+        "productName": "Printer",
+        "quantity": 1,
+        "price": 200.00
+      }
+    ],
+    "totalAmount": 200.00
+  },
+  {
+    "orderId": 7,
+    "customerName": "Ethan Black",
+    "orderDate": "2023-10-07",
+    "items": [
+      {
+        "productId": 109,
+        "productName": "Tablet",
+        "quantity": 1,
+        "price": 300.00
+      },
+      {
+        "productId": 110,
+        "productName": "Tablet Case",
+        "quantity": 1,
+        "price": 25.00
+      }
+    ],
+    "totalAmount": 325.00
+  },
+  {
+    "orderId": 8,
+    "customerName": "Fiona Gray",
+    "orderDate": "2023-10-08",
+    "items": [
+      {
+        "productId": 111,
+        "productName": "Smartphone",
+        "quantity": 1,
+        "price": 800.00
+      }
+    ],
+    "totalAmount": 800.00
+  },
+  {
+    "orderId": 9,
+    "customerName": "George Blue",
+    "orderDate": "2023-10-09",
+    "items": [
+      {
+        "productId": 112,
+        "productName": "External Hard Drive",
+        "quantity": 2,
+        "price": 100.00
+      }
+    ],
+    "totalAmount": 200.00
+  },
+  {
+    "orderId": 10,
+    "customerName": "Hannah Violet",
+    "orderDate": "2023-10-10",
+    "items": [
+      {
+        "productId": 113,
+        "productName": "Webcam",
+        "quantity": 1,
+        "price": 75.00
+      },
+      {
+        "productId": 114,
+        "productName": "Microphone",
+        "quantity": 1,
+        "price": 50.00
+      }
+    ],
+    "totalAmount": 125.00
+  }
+]
