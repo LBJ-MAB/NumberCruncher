@@ -6,9 +6,19 @@ namespace CoreTests;
 
 public class Tests
 {
+    private List<OrderDetails> _actualList;
+    
     [SetUp]
     public void Setup()
     {
+        // define new query object
+        Query testQuery = new Query();
+        
+        // define json file path
+        string jsonFilePath = "orders.json";
+        
+        // define actual list
+        _actualList = testQuery.ReadAndParseJsonIntoList(jsonFilePath);
     }
     
     [Test]
@@ -93,8 +103,31 @@ public class Tests
     
     // --- testing the query methods ---
     [Test]
-    public void TestReadAndParseJsonIntoList()
+    public void TestOrderDetailsAreCorrect()
     {
+        // expected output for orderId, customerName, orderDate and totalAmount
+        int expectedOrderId = 1;
+        string expectedCustomerName = "John Doe";
+        string expectedOrderDate = "2023-10-01";
+        float expectedTotalAmount = 1251.00f;
         
+        // assertions for matching expected values
+        _actualList[0].OrderId.Should().Be(expectedOrderId, $"because this object in json file has order id of {expectedOrderId}");
+        _actualList[0].CustomerName.Should().Be(expectedCustomerName, $"because this object in json file has customer name of {expectedCustomerName}");
+        _actualList[0].OrderDate.Should().Be(expectedOrderDate, $"because this object in json file has order date of {expectedOrderDate}");
+        _actualList[0].TotalAmount.Should().Be(expectedTotalAmount, $"because this object in json file has total amount of {expectedTotalAmount}");
+    }
+
+    [Test]
+    public void TestOrderDetailsListNotEmpty()
+    {
+        _actualList.Should().NotBeEmpty().And.HaveCount(10, "Because there are 10 items in the json file");
+    }
+
+    [Test]
+    public void TestOrderDetailsUnhappyPath()
+    {
+        // just so long as number is not 10
+        _actualList.Should().NotHaveCount(7);
     }
 }

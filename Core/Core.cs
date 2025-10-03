@@ -1,5 +1,9 @@
 ﻿namespace Core;
 
+/*
+ * PRINT AVERAGES IS NOT A PURE FUNCTION
+ */
+
 public static class Statistics
 {
     public static double[]? ConvertStringToArray(string numberString)
