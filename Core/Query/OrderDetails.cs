@@ -2,9 +2,9 @@ namespace Core.Query;
 
 public class OrderDetails
 {
-    public int orderId;
-    public string customerName;
-    public string orderDate;
-    public List<Item> items;
-    public float totalAmount;
+    public int OrderId { get; set; }
+    public string CustomerName { get; set; }
+    public string OrderDate { get; set; }
+    public List<Item> Items { get; set; }
+    public float TotalAmount { get; set; }
 }

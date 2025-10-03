@@ -2,8 +2,8 @@ namespace Core.Query;
 
 public class Item
 {
-    public int productId;
-    public string productName;
-    public int quantity;
-    public float price;
+    public int ProductId { get; set; }
+    public string ProductName { get; set; }
+    public int Quantity { get; set; }
+    public float Price { get; set; }
 }
