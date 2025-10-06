@@ -77,7 +77,7 @@ public class Query
         return firstOrderWhere;
     }
     
-    // Using ForEach to map to a new list on whether or not each person spent more than the mean spent
+    // Using ForEach to map to a new list on whether each person spent more than the mean spent
     public List<bool> SpentMoreThanMean(List<OrderDetails> orderDetails)
     {
         // make a new list of just total Amounts
@@ -95,6 +95,13 @@ public class Query
         orderDetails.ForEach(order => spentMoreThanMeanList.Add(order.TotalAmount > meanTotalAmount));
 
         return spentMoreThanMeanList;
+    }
+    
+    // use the sum method 
+    public double SumTotalAmounts(List<OrderDetails> orders)
+    {
+        double sum = orders.Sum(order => order.TotalAmount);
+        return sum;
     }
     
     
