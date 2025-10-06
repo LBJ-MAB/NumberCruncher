@@ -97,31 +97,96 @@ public class Query
         return spentMoreThanMeanList;
     }
     
-    // use the sum method 
+    // use the sum method to sum total Amounts 
     public double SumTotalAmounts(List<OrderDetails> orders)
     {
         double sum = orders.Sum(order => order.TotalAmount);
         return sum;
     }
     
+    // get total # of items bought
+    public int TotalItemsBought(List<OrderDetails> orders)
+    {
+        int totalItemsBought = 0;
+        
+        orders.ForEach((order) =>
+        {
+            int numOrderItems = order.Items.Sum(item => item.Quantity);
+            totalItemsBought += numOrderItems;
+        });
+
+        return totalItemsBought;
+    }
     
+    // convert to NameAndDateDTO method
+    public NameAndDateDTO ConvertToNameAndDateDTO(OrderDetails order)
+    {
+        return new NameAndDateDTO(order.CustomerName, order.OrderDate);
+    }
     
+    // try a projection to a DTO - NameAndDate - using .skip() method as well
+    public List<NameAndDateDTO> GetNameAndDateAfterThree(List<OrderDetails> orders)
+    {
+        List<NameAndDateDTO> nameAndDateAfterThree = orders.Skip(3).Select(order => ConvertToNameAndDateDTO(order)).ToList();
+        return nameAndDateAfterThree;
+    }
     
+    // convert to NameAndTotalAmountDTO method
+    public NameAndTotalAmountDTO ConvertToNameAndTotalAmountDTO(OrderDetails order)
+    {
+        return new NameAndTotalAmountDTO(order.CustomerName, order.TotalAmount);
+    }
     
+    // try another projection to DTO - NameAndTotalAmount - using .take() this time
+    public List<NameAndTotalAmountDTO> GetFirstThreeNameAndTotalAmount(List<OrderDetails> orders)
+    {
+        List<NameAndTotalAmountDTO> firstThreeNameAndTotalAmount = orders.Take(3).Select(order => ConvertToNameAndTotalAmountDTO(order)).ToList();
+        return firstThreeNameAndTotalAmount;
+    }
     
+    // using .Concat() to concatenate two lists
+    public List<OrderDetails> ConcatOrderLists(List<List<OrderDetails>> listOfOrderLists)
+    {
+        // empty list to start off with
+        List<OrderDetails> concatenatedList = new List<OrderDetails>();
+        
+        // concatenate lists
+        foreach (List<OrderDetails> orderList in listOfOrderLists)
+        {
+            concatenatedList = concatenatedList.Concat(orderList).ToList();
+        }
+
+        return concatenatedList;
+    }
     
+    // using .Union() to merge two lists without duplicates
+    public List<OrderDetails> UnionTwoOrderLists(List<OrderDetails> orders1, List<OrderDetails> orders2)
+    {
+        return orders1.Union(orders2).ToList();
+    }
+    
+    // use .ToLookup() to group by order date
+    
+
+
+
+
+
+
+
+
     // method for filter
-    
-    
+
+
     // method for map
-    
+
     // method for group
-    
+
     // method for join
-    
+
     // projections to DTOs
-    
+
     // sorting
-    
+
     // pagination
 }
