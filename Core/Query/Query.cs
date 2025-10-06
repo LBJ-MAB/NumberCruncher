@@ -3,10 +3,6 @@ using Core;
 
 namespace Core.Query;
 
-/*
- * TRY USING RECORDS INSTEAD OF CLASSES FOR ORDERDETAILS AND ITEM
- */
-
 // class for dealing with reading in and parsing json
 public class Query
 {
@@ -19,7 +15,7 @@ public class Query
     // method for reading in json and returning a list of OrderDetails objects
     public List<OrderDetails> ReadAndParseJsonIntoList(string jsonFilePath)
     {
-        // define json 
+        // define json
         string json = File.ReadAllText(jsonFilePath);
         
         // deserialize json into List of OrderDetails() objects
@@ -28,25 +24,12 @@ public class Query
         return orders;
     }
     
-    // method for printing the details of an order
-    public void PrintOrderDetails(OrderDetails order)
-    {
-        Console.WriteLine("Order Id : {0}", order.OrderId);
-        Console.WriteLine("Customer Name : {0}", order.CustomerName);
-        Console.WriteLine("Order date : {0}", order.OrderDate);
-        Console.WriteLine("Items: ");
-        foreach (Item item in order.Items)
-        {
-            Console.WriteLine("  {0}x {1} for {2:C}", item.Quantity, item.ProductName, item.Price);
-        }
-        Console.WriteLine("Total Amount : {0}\n", order.TotalAmount);
-    }
-    
     // Where method to filter by orderId
     public List<OrderDetails> FilterByOrderId(List<OrderDetails> orderDetails, int orderId)
     {
-        var filteredByOrderId = orderDetails.Where(order => order.OrderId == orderId).ToList();
-        return filteredByOrderId;
+        var filteredByOrderId = orderDetails.Where(order => order.OrderId == orderId);
+        Console.WriteLine(filteredByOrderId.GetType());
+        return filteredByOrderId.ToList();
     }
     
     // Where method to filter by minimum spend
@@ -118,29 +101,23 @@ public class Query
         return totalItemsBought;
     }
     
-    // convert to NameAndDateDTO method
-    public NameAndDateDTO ConvertToNameAndDateDTO(OrderDetails order)
-    {
-        return new NameAndDateDTO(order.CustomerName, order.OrderDate);
-    }
+    // convert to NameAndDateDTO method - delegate function
+    private Func<OrderDetails, NameAndDateDTO> ConvertToNameAndDateDTO = order => new NameAndDateDTO(order.CustomerName, order.OrderDate);
     
     // try a projection to a DTO - NameAndDate - using .skip() method as well
     public List<NameAndDateDTO> GetNameAndDateAfterThree(List<OrderDetails> orders)
     {
-        List<NameAndDateDTO> nameAndDateAfterThree = orders.Skip(3).Select(order => ConvertToNameAndDateDTO(order)).ToList();
+        List<NameAndDateDTO> nameAndDateAfterThree = orders.Skip(3).Select(ConvertToNameAndDateDTO).ToList();
         return nameAndDateAfterThree;
     }
     
-    // convert to NameAndTotalAmountDTO method
-    public NameAndTotalAmountDTO ConvertToNameAndTotalAmountDTO(OrderDetails order)
-    {
-        return new NameAndTotalAmountDTO(order.CustomerName, order.TotalAmount);
-    }
+    // convert to NameAndTotalAmountDTO method - delegate function
+    private Func<OrderDetails, NameAndTotalAmountDTO> ConvertToNameAndTotalAmountDTO = order => new NameAndTotalAmountDTO(order.CustomerName, order.TotalAmount);
     
     // try another projection to DTO - NameAndTotalAmount - using .take() this time
     public List<NameAndTotalAmountDTO> GetFirstThreeNameAndTotalAmount(List<OrderDetails> orders)
     {
-        List<NameAndTotalAmountDTO> firstThreeNameAndTotalAmount = orders.Take(3).Select(order => ConvertToNameAndTotalAmountDTO(order)).ToList();
+        List<NameAndTotalAmountDTO> firstThreeNameAndTotalAmount = orders.Take(3).Select(ConvertToNameAndTotalAmountDTO).ToList();
         return firstThreeNameAndTotalAmount;
     }
     
@@ -165,28 +142,36 @@ public class Query
         return orders1.Union(orders2).ToList();
     }
     
-    // use .ToLookup() to group by order date
+    // intersect method - common elements from both collections
+    public List<OrderDetails> IntersectTwoOrderLists(List<OrderDetails> orders1, List<OrderDetails> orders2)
+    {
+        return orders1.Intersect(orders2).ToList();
+    }
     
+    // Except method - returns values present in first collection but not present in second collection
+    public List<OrderDetails> InFirstButNotSecond(List<OrderDetails> orders1, List<OrderDetails> orders2)
+    {
+        return orders1.Except(orders2).ToList();
+    }
+    
+    
+    // USE IEnumerable<> RATHER THAN List<> AS WELL
+    
+    // method for generic filter using pattern matching
+    public IEnumerable<OrderDetails> Filter(List<OrderDetails> orders, Func<OrderDetails, bool> filterCriteriaFunction)
+    {
+        return orders.Where(filterCriteriaFunction);
+    }
 
+    // method for group (ToLookup) -> return a general ILookup depending on type of variable given? <T>
 
+    // sorting (order by, order by descending) -> pattern matching for ascending / descending
+    public IEnumerable<OrderDetails> Sort<T>(List<OrderDetails> orders, string sortDirection, Func<OrderDetails, T> sortProperty) =>
+        sortDirection switch
+        {
+            "ascending" => orders.OrderBy(sortProperty),
+            "descending" => orders.OrderByDescending(sortProperty),
+            _ => throw new ArgumentException("Invalid string value for sortDirection")
+        };
 
-
-
-
-
-
-    // method for filter
-
-
-    // method for map
-
-    // method for group
-
-    // method for join
-
-    // projections to DTOs
-
-    // sorting
-
-    // pagination
 }
