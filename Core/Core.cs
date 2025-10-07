@@ -127,7 +127,6 @@ public static class Statistics
         }
         return med;     // return med
     }
-    
     public static T Min<T>(T[] nums) where T: IComparable<T>
     {
         /*
@@ -150,11 +149,11 @@ public static class Statistics
         return minValue;    // return minValue
     }
     
-    public static double[]? Mode(double[] nums)
+    public static T[]? Mode<T>(T[] nums)
     {
         /*
          * INPUTS:
-         * nums : an array of numbers
+         * nums : an array of numbers of type T
          * OUTPUTS:
          * modeValue : array of mode values || null if no mode value
         */
@@ -165,12 +164,12 @@ public static class Statistics
             return null;
         }
 
-        List<double> modeList = new List<double>();     // empty list for storing mode values n
+        List<T> modeList = new List<T>();     // empty list for storing mode values n
         int maxOccurences = 0;                          // number of times the mode number appears
-        Dictionary<double, int> dict = new Dictionary<double, int>();       // define dictionary for number, total pairs
+        Dictionary<T, int> dict = new Dictionary<T, int>();       // define dictionary for number, total pairs
 
         // loop through each number of nums
-        foreach (double num in nums)
+        foreach (T num in nums)
         {
             if (dict.ContainsKey(num))      // current number has already appeared in nums array
             {
@@ -195,7 +194,7 @@ public static class Statistics
         }
 
         // loop through each <number, total> in dictionary
-        foreach (KeyValuePair<double, int> ele in dict)
+        foreach (KeyValuePair<T, int> ele in dict)
         {
             if (ele.Value == maxOccurences)      // if it is a mode value
             {
@@ -205,6 +204,7 @@ public static class Statistics
 
         return modeList.ToArray();    // return array of mode values
     }
+    
     public static double Stdev(double[] nums)
     {
         /*
@@ -225,7 +225,6 @@ public static class Statistics
         }
         return Math.Sqrt(sumSquareDiff / nums.Length);      // return square root of sumSquareDiff / array length
     }
-
     public static double Sum(double[] nums)
     {
         double sum = 0;
