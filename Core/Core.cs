@@ -202,7 +202,6 @@ public static class Statistics
 
         return modeList.ToArray();    // return array of mode values
     }
-    
     public static double Stdev<T>(T[] nums)
     {
         /*
@@ -223,10 +222,9 @@ public static class Statistics
         }
         return Math.Sqrt(sumSquareDiff / nums.Length);      // return square root of sumSquareDiff / array length
     }
-    
-    public static double Sum(double[] nums)
+    public static T Sum<T>(T[] nums)
     {
-        double sum = 0;
+        dynamic sum = 0;
         for (int i = 0; i < nums.Length; i++)
         {
             sum += nums[i];
