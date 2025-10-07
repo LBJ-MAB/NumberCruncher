@@ -101,32 +101,32 @@ public static class Statistics
         // return sum divided by amount of numbers in array
         return sum / nums.Length;
     }
-    
-    public static T Median<T>(T[] nums)
+    public static double Median<T>(T[] nums)
     {
         /*
          * INPUTS:
-         * nums : an array of numbers
+         * nums : an array of numbers of type T
          * OUTPUTS:
          * med : the median of the nums array
         */
         
         Array.Sort(nums);       // sort the array from smallest to largest
-        T med;             // define variable for storing median value
+        double med;             // define variable for storing median value
         
         if (nums.Length % 2 != 0)    // length of array is odd  
         {
             int medianIndex = nums.Length / 2;      // find middle index
-            med = nums[medianIndex];                // median is middle number in sorted array
+            med = Convert.ToDouble(nums[medianIndex]);                // median is middle number in sorted array
         }
         else    // length of array is even
         {
             int upperIndex = nums.Length / 2;       // find first index above middle of array
             int lowerIndex = upperIndex - 1;        // find first index below middle of array
-            med = ((dynamic)nums[upperIndex]! + (dynamic)nums[lowerIndex]!) / 2;    // median is sum two numbers at these indeces and divide by 2
+            med = (Convert.ToDouble(nums[upperIndex]) + Convert.ToDouble(nums[lowerIndex])) / 2;    // median is sum two numbers at these indeces and divide by 2
         }
         return med;     // return med
     }
+    
     public static T Min<T>(T[] nums) where T: IComparable<T>
     {
         /*
