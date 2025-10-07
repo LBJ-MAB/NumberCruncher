@@ -113,7 +113,64 @@ public class LinqMethodsTests
                     CustomerName : "Charlie Green",
                     TotalAmount : 70.00f));
     }
-    
+
     [Test]
-    
+    public void FindFirstOrderExceedingTest()
+    {
+        // define minimum amount
+        float minAmount = 570.0f;
+        // define actual result
+        OrderDetails firstOrderExceeding = _testQuery.FindFirstOrderExceeding(_actualList, minAmount);
+        
+        // should not be null
+        firstOrderExceeding.Should().NotBeNull();
+        // name should be John Doe
+        firstOrderExceeding.CustomerName.Should().Be("John Doe");
+        // id should be 1
+        firstOrderExceeding.OrderId.Should().Be(1);
+        // date should be 2023-10-01
+        firstOrderExceeding.OrderDate.Should().Be("2023-10-01");
+        // total amount should be approx 1251.00
+        firstOrderExceeding.TotalAmount.Should().BeApproximately(1251.00f, 0.01f);
+        // Items.ElementAt should satisfy ...
+        firstOrderExceeding.Items.ElementAt(0).Should().Satisfy<Item>(item =>
+        {
+            item.ProductId.Should().Be(101);
+            item.ProductName.Should().Be("Laptop");
+            item.Quantity.Should().Be(1);
+            item.Price.Should().BeApproximately(1200.00f, 0.01f);
+        });
+    }
+
+    [Test]
+    public void GetNameAndDateAfterThreeTest()
+    {
+         // define actual result
+         List<NameAndDateDTO> nameAndDateDTOs = _testQuery.GetNameAndDateAfterThree(_actualList);
+         
+         // John Doe name and date DTO
+         NameAndDateDTO JohnDoe = new NameAndDateDTO(CustomerName: "John Doe", OrderDate: "2023-10-01");
+         // Jane Smith name and date DTO
+         NameAndDateDTO JaneSmith = new NameAndDateDTO(CustomerName: "Jane Smith", OrderDate: "2023-10-02");
+         // Alice Johnson name and date DTO
+         NameAndDateDTO AliceJohnson = new NameAndDateDTO(CustomerName: "Alice Johnson", OrderDate: "2023-10-01");
+         // Bob Brown name and date DTO
+         NameAndDateDTO BobBrown = new NameAndDateDTO(CustomerName: "Bob Brown", OrderDate: "2023-10-01");
+         
+         
+         // should not contain
+         nameAndDateDTOs.Should().NotContain(nameAndDate => nameAndDate == AliceJohnson);
+         // should not be empty
+         nameAndDateDTOs.Should().NotBeEmpty();
+         // should HaveCount (7)
+         nameAndDateDTOs.Should().HaveCount(7);
+         // elementAt should satisfy
+         nameAndDateDTOs.ElementAt(2).Should().Satisfy<NameAndDateDTO>(dto =>
+         {
+             dto.CustomerName.Should().Be("Diana White");
+             dto.OrderDate.Should().Be("2023-10-01");
+         });
+         // should start with
+         nameAndDateDTOs.Should().StartWith(BobBrown);
+    }
 }
