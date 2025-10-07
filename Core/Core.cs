@@ -6,6 +6,8 @@
 
 public static class Statistics
 {
+    // Change these to generic functions? (int, float, double, long, decimal) etc.
+    
     public static double[]? ConvertStringToArray(string numberString)
     {
         /*
@@ -200,48 +202,6 @@ public static class Statistics
 
         return modeList.ToArray();    // return array of mode values
     }
-    public static void PrintAverages(double mean, double[]? mode, double median,
-        double min, double max, double stdev)
-    {
-        /*
-         * INPUTS:
-         * mean : mean value of an array
-         * mode : array of mode values of an array
-         * median : median value of an array
-         * min : min value of an array
-         * max : max value of an array
-         * stdev : standard deviation of an array
-         * OUTPUTS:
-         * None : Prints to console each of the averages given as arguments
-        */
-        
-        Console.WriteLine("--- Averages ---");
-        Console.WriteLine("Mean   : {0:F2}", mean);
-        Console.Write("Mode   : ");
-        if (mode != null)
-        {
-            for (int i = 0; i < mode.Length; i++)
-            {
-                if (i != mode.Length - 1)
-                {
-                    Console.Write("{0:F2}, ", mode[i]);
-                }
-                else
-                {
-                    Console.Write("{0:F2}", mode[i]);
-                }
-            }
-        }
-        else
-        {
-            Console.Write("N/A");
-        }
-        Console.WriteLine("");
-        Console.WriteLine("Median : {0:F2}", median);
-        Console.WriteLine("Min    : {0:F2}", min);
-        Console.WriteLine("Max    : {0:F2}", max);
-        Console.WriteLine("Stdev  : {0:F2}", stdev);
-    }
     public static double Stdev(double[] nums)
     {
         /*
@@ -261,5 +221,15 @@ public static class Statistics
             sumSquareDiff += squareDiff;        // increment sumSquareDiff by squareDiff
         }
         return Math.Sqrt(sumSquareDiff / nums.Length);      // return square root of sumSquareDiff / array length
+    }
+
+    public static double Sum(double[] nums)
+    {
+        double sum = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            sum += nums[i];
+        }
+        return sum;
     }
 }

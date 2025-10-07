@@ -21,7 +21,7 @@ public class Query
         // deserialize json into List of OrderDetails() objects
         List<OrderDetails>? orders = JsonSerializer.Deserialize<List<OrderDetails>>(json, _options);
 
-        return orders;
+        return orders!;
     }
     
     // Where method to filter by orderId
