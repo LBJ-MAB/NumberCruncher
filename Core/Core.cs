@@ -59,7 +59,6 @@ public static class Statistics
         // return the array of numbers
         return numbersList.ToArray();
     }
-    
     public static T Max<T>(T[] nums) where T: IComparable<T>
     {
         /*
@@ -82,7 +81,7 @@ public static class Statistics
         }
         return maxValue;    // return maxValue
     }
-    public static T Mean<T>(T[] nums)
+    public static double Mean<T>(T[] nums)
     {
         /*
          * INPUTS:
@@ -92,16 +91,17 @@ public static class Statistics
         */
         
         // initalise sum with 0
-        dynamic sum = 0;
+        double sum = 0;
         
         // loop through all numbers in array
         for (int i = 0; i < nums.Length; i++)
         {
-            sum += nums[i];         // add current number to the sum
+            sum += Convert.ToDouble(nums[i]);         // add current number to the sum
         }
         // return sum divided by amount of numbers in array
         return sum / nums.Length;
     }
+    
     public static T Median<T>(T[] nums)
     {
         /*
@@ -148,7 +148,6 @@ public static class Statistics
         }
         return minValue;    // return minValue
     }
-    
     public static T[]? Mode<T>(T[] nums)
     {
         /*
@@ -225,6 +224,7 @@ public static class Statistics
         }
         return Math.Sqrt(sumSquareDiff / nums.Length);      // return square root of sumSquareDiff / array length
     }
+    
     public static double Sum(double[] nums)
     {
         double sum = 0;
