@@ -126,7 +126,6 @@ public static class Statistics
         }
         return med;     // return med
     }
-    
     public static T Min<T>(T[] nums) where T: IComparable<T>
     {
         /*
@@ -204,7 +203,7 @@ public static class Statistics
         return modeList.ToArray();    // return array of mode values
     }
     
-    public static double Stdev(double[] nums)
+    public static double Stdev<T>(T[] nums)
     {
         /*
          * INPUTS:
@@ -219,7 +218,7 @@ public static class Statistics
         // loop through each value in nums
         for (int i = 0; i < nums.Length; i++)
         {
-            double squareDiff = Math.Pow(nums[i] - mean, 2);    // compute square of difference between current number and mean
+            double squareDiff = Math.Pow(Convert.ToDouble(nums[i]) - mean, 2);    // compute square of difference between current number and mean
             sumSquareDiff += squareDiff;        // increment sumSquareDiff by squareDiff
         }
         return Math.Sqrt(sumSquareDiff / nums.Length);      // return square root of sumSquareDiff / array length
