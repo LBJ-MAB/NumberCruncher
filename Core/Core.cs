@@ -59,28 +59,30 @@ public static class Statistics
         // return the array of numbers
         return numbersList.ToArray();
     }
-    public static double Max(double[] nums)
+    
+    public static T Max<T>(T[] nums) where T: IComparable<T>
     {
         /*
          * INPUTS:
-         * nums : an array of numbers
+         * nums : an array of numbers of type T
          * OUTPUTS:
          * maxValue : the highest number in the nums array
         */
         
         // initialise maxValue as first element
-        double maxValue = nums[0];
+        T maxValue = nums[0];
         
         // check the rest of the numbers in the array
         for (int i = 1; i < nums.Length; i++)
         {
-            if (nums[i] > maxValue) // current number > maxValue
+            if (nums[i].CompareTo(maxValue) > 0) // current number > maxValue
             {
                 maxValue = nums[i]; // set maxValue to current number
             }
         }
         return maxValue;    // return maxValue
     }
+    
     public static double Mean(double[] nums)
     {
         /*
