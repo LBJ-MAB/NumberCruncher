@@ -102,7 +102,6 @@ public static class Statistics
         // return sum divided by amount of numbers in array
         return sum / nums.Length;
     }
-    
     public static T Median<T>(T[] nums)
     {
         /*
@@ -129,7 +128,7 @@ public static class Statistics
         return med;     // return med
     }
     
-    public static double Min(double[] nums)
+    public static T Min<T>(T[] nums) where T: IComparable<T>
     {
         /*
          * INPUTS:
@@ -138,18 +137,19 @@ public static class Statistics
          * minValue : the smallest number in nums array
         */
         
-        double minValue = nums[0];      // initialise minValue as first number in array
+        T minValue = nums[0];      // initialise minValue as first number in array
         
         // loop through rest of numbers in the array
         for (int i = 1; i < nums.Length; i++)
         {
-            if (nums[i] < minValue)     // current number < minValue
+            if (nums[i].CompareTo(minValue) < 0)     // current number < minValue
             {
                 minValue = nums[i];     // set minValue to current number
             }
         }
         return minValue;    // return minValue
     }
+    
     public static double[]? Mode(double[] nums)
     {
         /*
