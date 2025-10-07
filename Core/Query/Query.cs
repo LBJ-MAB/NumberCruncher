@@ -157,7 +157,7 @@ public class Query
     
     // USE IEnumerable<> RATHER THAN List<> AS WELL
     
-    // method for generic filter using pattern matching
+    // method for generic filter
     public IEnumerable<OrderDetails> Filter(List<OrderDetails> orders, Func<OrderDetails, bool> filterCriteriaFunction)
     {
         return orders.Where(filterCriteriaFunction);
@@ -165,7 +165,7 @@ public class Query
 
     // method for group (ToLookup) -> return a general ILookup depending on type of variable given? <T>
 
-    // sorting (order by, order by descending) -> pattern matching for ascending / descending
+    // generic sort method -> pattern matching for ascending / descending
     public IEnumerable<OrderDetails> Sort<T>(List<OrderDetails> orders, string sortDirection, Func<OrderDetails, T> sortProperty) =>
         sortDirection switch
         {

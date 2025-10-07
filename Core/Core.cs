@@ -1,13 +1,7 @@
 ﻿namespace Core;
 
-/*
- * PRINT AVERAGES IS NOT A PURE FUNCTION
- */
-
 public static class Statistics
 {
-    // Change these to generic functions? (int, float, double, long, decimal) etc.
-    
     public static double[]? ConvertStringToArray(string numberString)
     {
         /*
@@ -147,7 +141,7 @@ public static class Statistics
         }
         return minValue;    // return minValue
     }
-    public static T[]? Mode<T>(T[] nums)
+    public static T[]? Mode<T>(T[] nums) where T : notnull
     {
         /*
          * INPUTS:
