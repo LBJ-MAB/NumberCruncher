@@ -59,6 +59,7 @@ public static class Statistics
         // return the array of numbers
         return numbersList.ToArray();
     }
+    
     public static T Max<T>(T[] nums) where T: IComparable<T>
     {
         /*
@@ -81,7 +82,6 @@ public static class Statistics
         }
         return maxValue;    // return maxValue
     }
-    
     public static T Mean<T>(T[] nums)
     {
         /*
@@ -103,7 +103,7 @@ public static class Statistics
         return sum / nums.Length;
     }
     
-    public static double Median(double[] nums)
+    public static T Median<T>(T[] nums)
     {
         /*
          * INPUTS:
@@ -113,7 +113,7 @@ public static class Statistics
         */
         
         Array.Sort(nums);       // sort the array from smallest to largest
-        double med;             // define variable for storing median value
+        T med;             // define variable for storing median value
         
         if (nums.Length % 2 != 0)    // length of array is odd  
         {
@@ -124,10 +124,11 @@ public static class Statistics
         {
             int upperIndex = nums.Length / 2;       // find first index above middle of array
             int lowerIndex = upperIndex - 1;        // find first index below middle of array
-            med = (nums[upperIndex] + nums[lowerIndex]) / 2;    // median is sum two numbers at these indeces and divide by 2
+            med = ((dynamic)nums[upperIndex]! + (dynamic)nums[lowerIndex]!) / 2;    // median is sum two numbers at these indeces and divide by 2
         }
         return med;     // return med
     }
+    
     public static double Min(double[] nums)
     {
         /*
